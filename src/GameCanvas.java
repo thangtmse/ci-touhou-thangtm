@@ -1,3 +1,6 @@
+import touhou.PlayerSpell;
+import touhou.Player;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -6,89 +9,57 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class GameCanvas extends JPanel {
     BufferedImage background;
-    BufferedImage player;
-    int playerX=182;
-    int playerY=300;
-    boolean rightPressed;
-    boolean leftPressed;
-    boolean upPressed;
-    boolean downPressed;
-    public GameCanvas(){
+
+    BufferedImage enemies;
+   Player player=new Player();
+    ArrayList<PlayerSpell> spells=new ArrayList<>();
+
+
+    public GameCanvas() {
         //1.load background
         try {
             background = ImageIO.read(new File("assets/images/background/0.png"));
-            player =ImageIO.read(new File("assets/images/players/straight/0.png"));
+
+            enemies = ImageIO.read(new File("assets/images/enemies/explosion-big/0.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+    public void keyPressed(KeyEvent e){
+        player.keyPressed(e);
 
+    }
+
+
+    public void keyReleased(KeyEvent e){
+        player.keyReleased(e);
+
+    }
+
+    public void run(){
+        player.run();
+       player.shoot(spells);
+
+
+    }
     @Override
     protected void paintComponent(Graphics g) {
 
-       g.drawImage(background,0,0,null);
-       g.drawImage(player,playerX,playerY,null);
+        g.drawImage(background, 0, 0, null);
+           player.render(g);
+              for(PlayerSpell spell: spells){
+                  spell.render(g);
+              }
+
+
+
+        g.drawImage(enemies, 0, 0, null);
     }
 
-    public void keyPressed(KeyEvent e) {
-        if(e.getKeyCode()== KeyEvent.VK_RIGHT){
 
-            rightPressed = true;
 
-        }
-        if(e.getKeyCode()==KeyEvent.VK_LEFT){
-
-            leftPressed =true;
-
-        }
-        if(e.getKeyCode()==KeyEvent.VK_UP){
-        upPressed=true;
-
-        }
-        if(e.getKeyCode()==KeyEvent.VK_DOWN){
-            downPressed=true;
-
-        }
-
-    }
-
-    public void keyReleased(KeyEvent e) {
-        if(e.getKeyCode()== KeyEvent.VK_RIGHT){
-
-            rightPressed = false;
-
-        }
-        if(e.getKeyCode()==KeyEvent.VK_LEFT){
-
-            leftPressed =false;
-
-        }
-        if(e.getKeyCode()==KeyEvent.VK_UP){
-            upPressed=false;
-
-        }
-        if(e.getKeyCode()==KeyEvent.VK_DOWN){
-            downPressed=false;
-
-        }
-    }
-    public void run(){
-        int vx=0;
-        int vy=0;
-
-        if(rightPressed){
-            vx+=5;
-        }if(leftPressed){
-            vx-=5;
-        }if(upPressed){
-            vy-=5;
-        }if(downPressed){
-            vy+=5;
-        }
-        playerX=playerX+vx;
-        playerY=playerY+vy;
-    }
 }

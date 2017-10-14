@@ -8,7 +8,7 @@ public class GameWindow extends JFrame {
     GameCanvas canvas;
 
     public GameWindow() {
-        this.setSize(390, 600);
+        this.setSize(800, 600);
         this.canvas = new GameCanvas();
         this.setContentPane(this.canvas);
         this.addWindowListener(new WindowAdapter() {
