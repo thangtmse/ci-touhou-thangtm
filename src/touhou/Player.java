@@ -6,11 +6,12 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Timer;
 
 public class Player {
     public int x = 182;
     public int y = 300;
-    PlayerSpell bullets=new PlayerSpell();
+    //PlayerSpell bullets=new PlayerSpell();
     BufferedImage player;
     boolean rightPressed;
     boolean leftPressed;
@@ -22,6 +23,8 @@ public class Player {
     final int TOP=0;
     boolean xPressed;
     final int BOTTON=500;
+     long end;
+     long time;
     public Player(){
         player= Util.loadImage("assets/images/players/straight/0.png");
     }
@@ -99,14 +102,26 @@ public class Player {
         x=(int)clamp(x,LEFT,RIGHT);
         y=(int)clamp(y,TOP,BOTTON);
     }
+
      public void shoot(ArrayList<PlayerSpell> spells){
+           long start=System.currentTimeMillis();
+
          if(xPressed){
-             PlayerSpell newSpell=new PlayerSpell();
-             newSpell.x=x;
-             newSpell.y=y;
-             spells.add(newSpell);
+             if(start>time){
+                 time=start+200;
+                 PlayerSpell newSpell=new PlayerSpell();
+                 newSpell.x=x;
+                 newSpell.y=y;
+                 spells.add(newSpell);
+
+
+             }
+
+
          }
+
          for(PlayerSpell sppell: spells){
+
              sppell.run();
          }
      }
