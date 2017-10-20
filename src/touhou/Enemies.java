@@ -1,5 +1,6 @@
 package touhou;
 
+import basic.GameObject;
 import basic.Util;
 
 import javax.imageio.ImageIO;
@@ -9,9 +10,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Enemies {
+public class Enemies extends GameObject {
     BufferedImage enemies;
-    //EnemyBullets bullets=new EnemyBullets();
+
     int SPEED ;
     int y=3;
     Random rd=new Random();
@@ -19,7 +20,7 @@ public class Enemies {
 
     int x=rd.nextInt(200);
     public Enemies(){
-//        enemies= Util.loadImage("assets/images/enemies/explosion-big/0.png");
+
         enemies= Util.loadImage("assets/images/enemies/level0/black/0.png");
     }
     public void render(Graphics g){
@@ -31,36 +32,38 @@ public class Enemies {
     }
 
 
-    public void shoot(ArrayList<EnemyBullets> enemyBullet){
+    public void shoot(){
         long start=System.currentTimeMillis();
 
         if(start>time){
-            time=start+400;
+            time=start+1000;
             EnemyBullets bullets=new EnemyBullets();
+
             bullets.x=x;
             bullets.y=y;
-            enemyBullet.add(bullets);
+            GameObject.add(bullets);
 
         }
 
     }
-
-    public void run(int width) {
-        x++;
-       if(x>width){
+    public void move(){
+       x++;
+       if(x<0){
+           SPEED=3;
+       }else if(x>360){
            SPEED=-3;
-       }else if(x<0){
-           SPEED=2;
        }
        x+=SPEED;
+
+
+
+
     }
 
-    @Override
-    public String toString() {
-        return "Enemies{" +
-                ", x=" + x +
-                ", y=" + y +
-                ", rd=" + rd +
-                '}';
+    public void run() {
+       shoot();
+       move();
     }
+
+
 }

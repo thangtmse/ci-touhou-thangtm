@@ -15,7 +15,7 @@ public class GameCanvas extends JPanel {
    BufferedImage background;
     Enemies enemie = new Enemies();
 
-    ArrayList<Enemies> enemies = new ArrayList<>();
+    //ArrayList<Enemies> enemies = new ArrayList<>();
     Player player = new Player();
 
     ArrayList<PlayerSpell> spells = new ArrayList<>();
@@ -32,7 +32,7 @@ public class GameCanvas extends JPanel {
             e.printStackTrace();
         }
         GameObject.add(player);
-
+        GameObject.add(enemie);
     }
 
     public void keyPressed(KeyEvent e) {
@@ -50,19 +50,13 @@ public class GameCanvas extends JPanel {
     public void run() {
 
         GameObject.runAll();
-//        player.shoot(spells);
-//
-//        enemie.run(getWidth());
-        //enemie.shoot(bullets);
-//        for (EnemyBullets bullet : bullets) {
-//            bullet.run();
-//        }
+
         y--;
     }
-    public int getWidth(){
+    public  int getWidths(){
         return background.getWidth();
     }
-    public int getHeight(){
+    public int getHeights(){
         return background.getHeight();
     }
     @Override

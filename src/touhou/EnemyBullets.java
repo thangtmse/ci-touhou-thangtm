@@ -1,11 +1,12 @@
 package touhou;
 
+import basic.GameObject;
 import basic.Util;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class EnemyBullets {
+public class EnemyBullets extends GameObject {
     BufferedImage image;
     int x;
     int y;
@@ -22,12 +23,5 @@ public class EnemyBullets {
         y+=SPEED;
     }
 
-    @Override
-    public String toString() {
-        return "EnemyBullets{" +
-                ", x=" + x +
-                ", y=" + y +
-                ", SPEED=" + SPEED +
-                '}';
-    }
+
 }

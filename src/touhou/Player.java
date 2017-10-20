@@ -11,7 +11,7 @@ import java.util.Timer;
 
 public class Player extends GameObject {
 
-    //PlayerSpell bullets=new PlayerSpell();
+
 
     boolean rightPressed;
     boolean leftPressed;
@@ -23,8 +23,7 @@ public class Player extends GameObject {
     final int TOP=0;
     boolean xPressed;
     final int BOTTON=500;
-     //boolean spellDisable=false;
-    // final int COOL_DOWN_TIME=30;
+
      long time;
     public Player(){
         x=182;
@@ -109,16 +108,9 @@ public class Player extends GameObject {
         y=(int)clamp(y,TOP,BOTTON);
     }
 
-    int coolDownCount;
+
      public void shoot(){
-//         if(spellDisable){
-//             coolDownCount++;
-//             if(coolDownCount>=COOL_DOWN_TIME){
-//                 spellDisable=false;
-//                 coolDownCount=0;
-//             }
-//             return;
-//         }
+
            long start=System.currentTimeMillis();
 
          if(xPressed){
@@ -128,7 +120,7 @@ public class Player extends GameObject {
                  newSpell.x=x;
                  newSpell.y=y;
                  GameObject.add(newSpell);
-                // spellDisable=true;
+
 
 
              }
@@ -136,10 +128,7 @@ public class Player extends GameObject {
 
          }
 
-//         for(PlayerSpell sppell:  ){
-//
-//             sppell.run();
-//         }
+
      }
     private float clamp(float value, float min, float max) {
         if (value < min) {
