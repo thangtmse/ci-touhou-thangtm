@@ -1,5 +1,6 @@
 package touhou;
 
+import basic.GameObject;
 import basic.Util;
 
 import java.awt.*;
@@ -8,11 +9,10 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Timer;
 
-public class Player {
-    public int x = 182;
-    public int y = 300;
+public class Player extends GameObject {
+
     //PlayerSpell bullets=new PlayerSpell();
-    BufferedImage player;
+
     boolean rightPressed;
     boolean leftPressed;
     boolean upPressed;
@@ -23,14 +23,15 @@ public class Player {
     final int TOP=0;
     boolean xPressed;
     final int BOTTON=500;
-     long end;
+     //boolean spellDisable=false;
+    // final int COOL_DOWN_TIME=30;
      long time;
     public Player(){
-        player= Util.loadImage("assets/images/players/straight/0.png");
+        x=182;
+        y=500;
+        image= Util.loadImage("assets/images/players/straight/0.png");
     }
-    public void render(Graphics graphic){
-        graphic.drawImage(player,x,y,null);
-    }
+
 
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
@@ -82,6 +83,11 @@ public class Player {
         }
     }
     public void run() {
+        move();
+  shoot();
+    }
+
+    private void move() {
         int vx = 0;
         int vy = 0;
 
@@ -103,7 +109,16 @@ public class Player {
         y=(int)clamp(y,TOP,BOTTON);
     }
 
-     public void shoot(ArrayList<PlayerSpell> spells){
+    int coolDownCount;
+     public void shoot(){
+//         if(spellDisable){
+//             coolDownCount++;
+//             if(coolDownCount>=COOL_DOWN_TIME){
+//                 spellDisable=false;
+//                 coolDownCount=0;
+//             }
+//             return;
+//         }
            long start=System.currentTimeMillis();
 
          if(xPressed){
@@ -112,7 +127,8 @@ public class Player {
                  PlayerSpell newSpell=new PlayerSpell();
                  newSpell.x=x;
                  newSpell.y=y;
-                 spells.add(newSpell);
+                 GameObject.add(newSpell);
+                // spellDisable=true;
 
 
              }
@@ -120,10 +136,10 @@ public class Player {
 
          }
 
-         for(PlayerSpell sppell: spells){
-
-             sppell.run();
-         }
+//         for(PlayerSpell sppell:  ){
+//
+//             sppell.run();
+//         }
      }
     private float clamp(float value, float min, float max) {
         if (value < min) {
