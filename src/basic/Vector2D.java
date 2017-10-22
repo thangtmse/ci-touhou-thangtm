@@ -47,12 +47,12 @@ public class Vector2D {
 
     }
 
-    public Vector2D add(Vector2D other) {
+    public void add(Vector2D other) {
 
-        Vector2D v3 = new Vector2D(x, y);
-        v3.x += other.x;
-        v3.y += other.y;
-        return v3;
+
+        this.x += other.x;
+        this.y += other.y;
+
     }
 
     public void subtractby(Vector2D v2) {
@@ -76,9 +76,17 @@ public class Vector2D {
         this.x*=v2.x;
         this.y*=v2.y;
     }
+    public Vector2D normalize(){
+        float length=length();
+        return new Vector2D(this.x/length,this.y/length);
+    }
 
-    public double length() {
+    public float length() {
         double length = Math.sqrt(this.x * this.x + this.y * this.y);
-        return length;
+        return (float)length;
+    }
+
+    public void set(Vector2D position) {
+        set(position.x,position.y);
     }
 }

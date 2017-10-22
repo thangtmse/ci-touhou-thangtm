@@ -1,5 +1,7 @@
 import basic.GameObject;
 import touhou.*;
+import touhou.enemies.Enemy;
+import touhou.enemies.EnemySpawner;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -12,27 +14,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class GameCanvas extends JPanel {
-   BufferedImage background;
-    Enemies enemie = new Enemies();
+
+    //Enemies enemie = new Enemies();
 
     //ArrayList<Enemies> enemies = new ArrayList<>();
     Player player = new Player();
-
+    BackGround backGround=new BackGround();
     ArrayList<PlayerSpell> spells = new ArrayList<>();
     private int y;
     //ArrayList<Enemies> enemies=new ArrayList<>();
 
     public GameCanvas() {
         //1.load background
-        try {
-            background = ImageIO.read(new File("assets/images/background/0.png"));
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        GameObject.add(backGround);
         GameObject.add(player);
-        GameObject.add(enemie);
+        //GameObject.add(enemie);
+        GameObject.add(new EnemySpawner());
+        GameObject.add(new Enemy());
     }
 
     public void keyPressed(KeyEvent e) {
@@ -51,18 +49,13 @@ public class GameCanvas extends JPanel {
 
         GameObject.runAll();
 
-        y--;
+
     }
-    public  int getWidths(){
-        return background.getWidth();
-    }
-    public int getHeights(){
-        return background.getHeight();
-    }
+
     @Override
     protected void paintComponent(Graphics g) {
 
-        g.drawImage(background, 0,y, null);
+
         GameObject.renderAll(g);
 
 

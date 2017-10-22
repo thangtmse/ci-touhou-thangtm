@@ -2,6 +2,7 @@ package touhou;
 
 import basic.GameObject;
 import basic.Util;
+import basic.Vector2D;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -17,17 +18,16 @@ public class Player extends GameObject {
     boolean leftPressed;
     boolean upPressed;
     boolean downPressed;
-    final int SPEED=2;
+    final int SPEED=5;
     final int LEFT=0;
-    final int RIGHT=360;
+    final int RIGHT=370;
     final int TOP=0;
     boolean xPressed;
     final int BOTTON=500;
 
      long time;
     public Player(){
-        x=182;
-        y=500;
+        position.set(182,500);
         image= Util.loadImage("assets/images/players/straight/0.png");
     }
 
@@ -85,27 +85,26 @@ public class Player extends GameObject {
         move();
   shoot();
     }
-
+    Vector2D velocity=new Vector2D();
     private void move() {
-        int vx = 0;
-        int vy = 0;
+        velocity.set(0,0);
+
 
         if (rightPressed) {
-            vx += SPEED;
+            velocity.x += SPEED;
         }
         if (leftPressed) {
-            vx -= SPEED;
+            velocity.x -= SPEED;
         }
         if (upPressed) {
-            vy -= SPEED;
+            velocity.y -= SPEED;
         }
         if (downPressed) {
-            vy += SPEED;
+            velocity.y += SPEED;
         }
-        x = x + vx;
-        y = y + vy;
-        x=(int)clamp(x,LEFT,RIGHT);
-        y=(int)clamp(y,TOP,BOTTON);
+        position.add(velocity);
+        position.x=(int)clamp(position.x,LEFT,RIGHT);
+        position.y=(int)clamp(position.y,TOP,BOTTON);
     }
 
 
@@ -117,8 +116,8 @@ public class Player extends GameObject {
              if(start>time){
                  time=start+200;
                  PlayerSpell newSpell=new PlayerSpell();
-                 newSpell.x=x;
-                 newSpell.y=y;
+                 newSpell.position.set(this.position);
+
                  GameObject.add(newSpell);
 
 
