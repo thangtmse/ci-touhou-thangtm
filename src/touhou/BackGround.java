@@ -6,8 +6,9 @@ import basic.Util;
 public class BackGround extends GameObject{
 
     public BackGround() {
-        position.set(0,0);
+
         image= Util.loadImage("assets/images/background/0.png");
+        position.set(0+image.getWidth()/2,0+image.getHeight()/2);
     }
     public void run(){
         position.y--;

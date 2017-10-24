@@ -3,6 +3,7 @@ package touhou;
 import basic.GameObject;
 import basic.Util;
 import basic.Vector2D;
+import basic.physics.BoxCollider;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -24,11 +25,17 @@ public class Player extends GameObject {
     final int TOP=0;
     boolean xPressed;
     final int BOTTON=500;
+    public BoxCollider boxCollider;
 
      long time;
     public Player(){
         position.set(182,500);
-        image= Util.loadImage("assets/images/players/straight/0.png");
+//        isActives=true;
+//        if(isActives==true){
+            this.image= Util.loadImage("assets/images/players/straight/0.png");
+       // }
+
+        boxCollider=new BoxCollider(30,30);
     }
 
 
@@ -81,7 +88,9 @@ public class Player extends GameObject {
             xPressed=false;
         }
     }
+
     public void run() {
+        boxCollider.position.set(this.position);
         move();
   shoot();
     }
@@ -138,5 +147,9 @@ public class Player extends GameObject {
             return max;
         }
         return value;
+    }
+
+    public void getHit() {
+         isActive=false;
     }
 }

@@ -20,8 +20,8 @@ public class GameCanvas extends JPanel {
     //ArrayList<Enemies> enemies = new ArrayList<>();
     Player player = new Player();
     BackGround backGround=new BackGround();
-    ArrayList<PlayerSpell> spells = new ArrayList<>();
-    private int y;
+    //ArrayList<PlayerSpell> spells = new ArrayList<>();
+    //private int y;
     //ArrayList<Enemies> enemies=new ArrayList<>();
 
     public GameCanvas() {

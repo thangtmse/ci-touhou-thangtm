@@ -27,6 +27,7 @@ public class PlayerSpell extends GameObject {
         Enemy enemy=GameObject.collideWidth(this.boxCollider);
         if(enemy!=null){
             enemy.getHit();
+            this.isActive=false;
         }
         }
     }

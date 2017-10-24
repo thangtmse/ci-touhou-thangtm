@@ -1,6 +1,7 @@
 package basic;
 
 import basic.physics.BoxCollider;
+import touhou.Player;
 import touhou.enemies.Enemy;
 
 import java.awt.*;
@@ -13,6 +14,7 @@ public class GameObject {
     static Vector<GameObject> gameObjects=new Vector<>();
     static Vector<GameObject> newGameObject=new Vector<>();
     public boolean isActive;
+   // public boolean isActives;
     public static void runAll(){
         for(GameObject gameObject:gameObjects){
             if(gameObject.isActive){
@@ -50,7 +52,7 @@ public class GameObject {
     }
      public static Enemy collideWidth(BoxCollider boxCollider){
         for(GameObject gameObject:gameObjects){
-            if(gameObject instanceof  Enemy){
+            if(gameObject.isActive&&gameObject instanceof  Enemy){
                 Enemy enemy=(Enemy)gameObject;
                 if(enemy.boxCollider.collideWidth(boxCollider)){
                     return enemy;
@@ -58,6 +60,17 @@ public class GameObject {
             }
         }
         return null;
+     }
+     public static Player collideWidths(BoxCollider boxCollider) {
+         for (GameObject gameObject : gameObjects) {
+             if (gameObject.isActive&&gameObject instanceof Player) {
+                 Player player = (Player) gameObject;
+                 if (player.boxCollider.collideWidth(boxCollider)) {
+                     return player;
+                 }
+             }
+         }
+         return null;
      }
 
 
