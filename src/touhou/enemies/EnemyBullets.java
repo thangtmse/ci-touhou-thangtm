@@ -22,9 +22,9 @@ public class EnemyBullets extends GameObject {
 
     public void run(){
        // int count=0;
-        position.y+=SPEED;
+        position.addUp(0,SPEED);
         boxCollider.position.set(this.position);
-       Player player=GameObject.collideWidths(this.boxCollider);
+       Player player=GameObject.collideWith(this.boxCollider,Player.class);
 
        if(player!=null){
            //start=System.currentTimeMillis();

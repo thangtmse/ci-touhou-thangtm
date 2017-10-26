@@ -12,7 +12,7 @@ public class BackGround extends GameObject{
     }
     public void run(){
         position.y--;
-        if(position.y<=-image.getHeight()){
+        if(position.y<=-image.getHeight()+200){
             position.y++;
         }
     }

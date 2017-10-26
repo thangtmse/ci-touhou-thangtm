@@ -1,3 +1,5 @@
+import touhou.input.InputManager;
+
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -26,12 +28,14 @@ public class GameWindow extends JFrame {
 
             @Override
             public void keyPressed(KeyEvent e) {
-             canvas.keyPressed(e);
+             //canvas.keyPressed(e);
+                InputManager.instance.keyPressed( e);
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
-                canvas.keyReleased(e);
+                //canvas.keyReleased(e);
+                InputManager.instance.keyReleased( e);
             }
         });
         this.canvas.setVisible(true);

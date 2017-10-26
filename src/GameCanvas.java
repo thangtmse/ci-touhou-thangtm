@@ -30,17 +30,17 @@ public class GameCanvas extends JPanel {
         GameObject.add(player);
         //GameObject.add(enemie);
         GameObject.add(new EnemySpawner());
-        GameObject.add(new Enemy());
+        //GameObject.add(new Enemy());
     }
 
     public void keyPressed(KeyEvent e) {
-        player.keyPressed(e);
+        //player.keyPressed(e);
 
     }
 
 
     public void keyReleased(KeyEvent e) {
-        player.keyReleased(e);
+       // player.keyReleased(e);
 
     }
 

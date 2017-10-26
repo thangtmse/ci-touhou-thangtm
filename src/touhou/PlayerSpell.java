@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
 
 public class PlayerSpell extends GameObject {
         BoxCollider boxCollider;
-    final int SPEED=8;
+    final int SPEED=6;
 
     public PlayerSpell() {
 
@@ -24,11 +24,18 @@ public class PlayerSpell extends GameObject {
         position.y-=SPEED;
         boxCollider.position.set(this.position);
 
-        Enemy enemy=GameObject.collideWidth(this.boxCollider);
+        Enemy enemy=GameObject.collideWith(this.boxCollider,Enemy.class);
         if(enemy!=null){
             enemy.getHit();
             this.isActive=false;
         }
+        deactiveIfNeded();
+        }
+
+    private void deactiveIfNeded() {
+        if(position.y<0){
+            this.isActive=false;
         }
     }
+}
 

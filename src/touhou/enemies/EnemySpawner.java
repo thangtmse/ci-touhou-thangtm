@@ -20,9 +20,10 @@ public class EnemySpawner extends GameObject {
     }
 
     private void spawn() {
-        Enemy enemy=new Enemy();
+        Enemy enemy=GameObject.recycle(Enemy.class);
+        System.out.println("ok");
         enemy.position.set(rd.nextInt(backGround.image.getWidth()-50),10);
 
-        GameObject.add(enemy);
+        //GameObject.add(enemy);
     }
 }
