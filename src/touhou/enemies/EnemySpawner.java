@@ -21,8 +21,9 @@ public class EnemySpawner extends GameObject {
 
     private void spawn() {
         Enemy enemy=GameObject.recycle(Enemy.class);
-        System.out.println("ok");
+        EnemiesSuper enemiesSuper=GameObject.recycle(EnemiesSuper.class);
         enemy.position.set(rd.nextInt(backGround.image.getWidth()-50),10);
+        enemiesSuper.position.set(rd.nextInt(backGround.image.getWidth()-50),30);
 
         //GameObject.add(enemy);
     }

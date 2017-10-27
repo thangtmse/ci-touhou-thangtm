@@ -21,26 +21,16 @@ public class EnemyBullets extends GameObject {
     }
 
     public void run(){
-       // int count=0;
+
         position.addUp(0,SPEED);
         boxCollider.position.set(this.position);
        Player player=GameObject.collideWith(this.boxCollider,Player.class);
 
        if(player!=null){
-           //start=System.currentTimeMillis();
-           //if(count==3){
+
                player.getHit();
                this.isActive=false;
-               //count=0;
-           //}
 
-           //count++;
-           //isActives=false;
-
-//           if(time>start){
-//            time=start+1000;
-//               isActives=true;
-//           }
 
 
 

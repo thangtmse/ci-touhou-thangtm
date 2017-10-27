@@ -3,6 +3,7 @@ package touhou;
 import basic.GameObject;
 import basic.Util;
 import basic.physics.BoxCollider;
+import touhou.enemies.EnemiesSuper;
 import touhou.enemies.Enemy;
 
 import javax.imageio.ImageIO;
@@ -25,15 +26,20 @@ public class PlayerSpell extends GameObject {
         boxCollider.position.set(this.position);
 
         Enemy enemy=GameObject.collideWith(this.boxCollider,Enemy.class);
-        if(enemy!=null){
+        EnemiesSuper enemiesSuper=GameObject.collideWith(this.boxCollider,EnemiesSuper.class);
+        if(enemy!=null  ){
             enemy.getHit();
+            this.isActive=false;
+        }
+        if(enemiesSuper!=null){
+            enemiesSuper.getHit();
             this.isActive=false;
         }
         deactiveIfNeded();
         }
 
     private void deactiveIfNeded() {
-        if(position.y<0){
+        if(position.y<0 ){
             this.isActive=false;
         }
     }
